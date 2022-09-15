@@ -5,8 +5,8 @@
         static void Main(string[] args)
         {
             //initialization
-            int[] primesList = { 2 , 3 }; //yes im cheating a bit by including two set cases it's easier that way
-            int checkNum = 5;
+            int[] primesList = { 2 }; 
+            int checkNum = 3;
             int? chosenNum = 0;
 
             //Ask for desired number of prime number from user
@@ -52,7 +52,7 @@
                     if (num % primesList[i] == 0)
                     {
                         valueIsPrime = false;
-                        Console.WriteLine("- Position " + primesList.Length + ": " + num + " failed dividing by " + primesList[i]);
+                        Console.WriteLine("- Position " + primesList.Length + " ("+primesList.Length*100/chosenNum+"%): " + num + " failed dividing by " + primesList[i]);
                         break;
                     }
                 }
@@ -60,7 +60,7 @@
                 if (valueIsPrime)
                 {
                     primesList = primesList.Append(num).ToArray();
-                    Console.WriteLine("- Position " + primesList.Length + ": Added " + num);
+                    Console.WriteLine("- Position " + primesList.Length + " (" + primesList.Length*100/chosenNum + "%): Added " + num);
                 }
                 checkNum += 2;
             }
