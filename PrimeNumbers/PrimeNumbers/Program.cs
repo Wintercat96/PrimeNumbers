@@ -4,44 +4,71 @@
     {
         static void Main(string[] args)
         {
-            int[] primesList = { 2 };
-            int? num = 0;
+            //initialization
+            int[] primesList = { 2 , 3 }; //yes im cheating a bit by including two set cases it's easier that way
+            int checkNum = 5;
+            int? chosenNum = 0;
 
-            //ask for desired number of prime number from user
+            //Ask for desired number of prime number from user
             Console.WriteLine("Welcome to the Prime Number Evaluator!");
 
-            while (num == 0)
+            while (chosenNum == 0)
             {
                 Console.WriteLine("Please input the index of the prime you are looking for: ");
-                num = Convert.ToInt32(Console.ReadLine());
+                chosenNum = Convert.ToInt32(Console.ReadLine());
 
-                if(num < 1)
+                if(chosenNum < 1)
                 {
-                    num = 0;
+                    chosenNum = 0;
                     Console.WriteLine("");
                     Console.WriteLine("Input invalid. Try a different number.");
                 }
             }
      
             Console.WriteLine("");
-            Console.WriteLine("You have selected number: " + num);
+            Console.WriteLine("You have selected number: " + chosenNum);
 
-            //calculate prime
-            Console.WriteLine("Calculating prime number at " + num + "...");
-
-
-
-            while (num - 1 > primesList.Length)
+            //Calculate the chosen prime
+            Console.WriteLine("Calculating prime number at " + chosenNum + "...");
+            while(chosenNum > primesList.Length)
             {
-
+                CheckPrime(checkNum);
             }
-            //Reminder: primesList = primesList.Append(3).ToArray();
-            
 
-            void CheckPrime(int prime)
+            //Completion
+            Console.WriteLine("Calculated prime number at position " + chosenNum + ": "+ primesList[primesList.Length - 1]);
+            Console.WriteLine("Calculation complete. Thank you for using the Prime Number Evaluator.");
+   
+
+            //Functions - just one actually
+
+            //Checks if a certain value is a prime number according to the already generated data in primesList
+            void CheckPrime(int num)
             {
+                bool valueIsPrime = true;
 
+                for (int i = primesList.Length - 1; i >= 0; i--)
+                {
+                    if (num % primesList[i] == 0)
+                    {
+                        valueIsPrime = false;
+                        Console.WriteLine("- Position " + primesList.Length + ": " + num + " failed dividing by " + primesList[i]);
+                        break;
+                    }
+                }
+
+                if (valueIsPrime)
+                {
+                    primesList = primesList.Append(num).ToArray();
+                    Console.WriteLine("- Position " + primesList.Length + ": Added " + num);
+                }
+                checkNum += 2;
             }
+
+
+
+
+
 
             /* game plan, lads
              * 
@@ -54,6 +81,9 @@
              * Remember: definition of prime number = divisible by self and 1 and NOTHING else
              * Inherently divisible by 1 and self so just check previous prime numbers
              */
+
+
+
         }
     }
 }
